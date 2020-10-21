@@ -32,6 +32,8 @@ int main(int argc, char **args)
     typedefines();
     functions(2,5,3);
     defines();
+    printfParams();
+    pointers();
 
     return 0;
 }
@@ -203,4 +205,38 @@ void defines()
 
     int i = MAX(3,4);
     printf("max of 3 and 4 is %i\n", i);
+}
+
+void printfParams()
+{
+    //signed integers
+    printf("2+3=%d\n", 5);
+    printf("2+3=%i\n", 5);
+    //unsigned int
+    printf("2+3=%u\n", 5);
+    //hex output; use x for lower case
+    printf("10 in hex is %X\n", 10);
+    //character
+    printf("first letter of 'sepp' is %c\n", 's');
+    //string
+    char str[] = "world";
+    printf("hello %s\n", str);
+    //double and floa
+    printf("pi is approx. %f\n", 3.1415926536);
+    //print %
+    printf("10%% of 100 is 10\n");
+}
+
+void pointers()
+{
+    int j = 1;
+    //copy address to pointer
+    int *address = &j;
+
+    printf("value of j is %d\n", j);
+    printf("address of j is %p\n", address);
+
+    //dereferences value at address
+    int val = *address;
+    printf("value of address is %d\n", val);
 }
