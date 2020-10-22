@@ -14,5 +14,8 @@ all:
 	mkdir -p bin
 	$(CC) $(INPUT) $(CFLAGS) $(WFLAGS) -o bin/program.out
 
+clean:
+	rm -rf bin
+
 run:
 	bin/program.out

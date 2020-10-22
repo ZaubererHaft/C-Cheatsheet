@@ -259,9 +259,33 @@ void pointers()
 
 //implemented by assembly code
 int addVariables(int a, int b);
+int countTo(int times);
+int sumTo(int times);
+float halfOf(int number);
+double thirdOf(int number);
+void addArray(int *arr1, int *arr2);
 
 void assembly()
 {
     int r = addVariables(2,3);
     printf("2+3=%d\n", r);
+
+    printf("counted to %d\n", countTo(5));
+    
+    //does not terminate!
+    //printf("counted to %d\n", countTo(0));
+    printf("sum from 1 to %d is %d\n", 5, sumTo(5));
+    printf("half of 5 is %f\n", halfOf(5));
+    printf("third of 1 is %f\n", thirdOf(1));
+
+    int arr1[] = {1,2,3};
+    int arr2[] = {4,5,6};
+    addArray(arr1, arr2);
+
+    for (int i = 0; i < 3; i++)
+    {
+        printf("val is %d\n", arr1[i]);
+    }
+    
 }
+
