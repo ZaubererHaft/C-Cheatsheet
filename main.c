@@ -34,6 +34,7 @@ int main(int argc, char **args)
     defines();
     printfParams();
     pointers();
+    assembly();
 
     return 0;
 }
@@ -229,6 +230,12 @@ void printfParams()
 
 void pointers()
 {
+    //sizeof returns the size of a type in bytes
+    printf("int is %lu bytes\n", sizeof(int));
+
+    //declare a pointer
+    int *ptr = NULL;
+
     int j = 1;
     //copy address to pointer
     int *address = &j;
@@ -239,4 +246,22 @@ void pointers()
     //dereferences value at address
     int val = *address;
     printf("value of address is %d\n", val);
+
+    //array and pointer are the same
+    int array[] = {1,2,3,4,5};
+    int *array_address = &array[0];
+
+    printf("value on 0 is %d\n", array_address[0]);
+    printf("value on 0 is %d\n", *array_address);
+    printf("value on 0 is %d\n", *array);
+    printf("value on 1 is %d\n", *array_address + 1);
+}
+
+//implemented by assembly code
+int addVariables(int a, int b);
+
+void assembly()
+{
+    int r = addVariables(2,3);
+    printf("2+3=%d\n", r);
 }

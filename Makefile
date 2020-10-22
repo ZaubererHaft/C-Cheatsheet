@@ -4,11 +4,15 @@
 # -Wextra:		        Enable additional warnings not covered by "-Wall"
 # -Wpedantic:	        Reject everything that is not ISO C
 # -g					Generates debug information to be used by GDB debugger
-WFLAGS = -Wall -Wextra -Wpedantic -g
+# -03					Maximum optimization level
+CC      := gcc
+INPUT	:= main.c addparams.S
+CFLAGS  := -g -O3
+WFLAGS	:= -Wall -Wextra -Wpedantic -g
 
 all:
 	mkdir -p bin
-	gcc main.c $(WFLAGS) -o bin/program.out
+	$(CC) $(INPUT) $(CFLAGS) $(WFLAGS) -o bin/program.out
 
 run:
 	bin/program.out
