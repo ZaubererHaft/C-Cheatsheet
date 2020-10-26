@@ -14,7 +14,7 @@ WFLAGS	:= -Wall -Wextra -Wpedantic -g
 
 all:
 	mkdir -p bin
-	nasm -felf64 $(SINPUT) -o bin/assembly.o
+	nasm -f elf64 -F dwarf -g $(SINPUT) -o bin/assembly.o
 	$(CC) $(OINPUT) $(CINPUT) $(CFLAGS) $(WFLAGS)  -o bin/program.out
 
 clean:
