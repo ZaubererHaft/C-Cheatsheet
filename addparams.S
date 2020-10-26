@@ -1,25 +1,41 @@
-# Calling Convention x64
-# Arguments 1 to 6
-# RDI - RSI - RDX - RCX - R8 - R9
-# 7 to infinity: stack 7th on [ESP + 0x8] (we save the jump back address)
+; Calling Convention x64
+; Arguments 1 to 6
+; RDI - RSI - RDX - RCX - R8 - R9
+; 7 to infinity: stack 7th on [ESP + 0x8] (we save the jump back address)
 
-# caller saved variables
-# RAX, RCX, RDX, RSI, RDI, R8, R9, R10, R11
-# callee saved
-# RBX, R12-R15, RSP
+; caller saved variables
+; RAX, RCX, RDX, RSI, RDI, R8, R9, R10, R11
+; callee saved
+; RBX, R12-R15, RSP
 
-#use intel intel syntax
-.intel_syntax noprefix
-#make function globally accessible
-.global addVariables
-.global countTo
-.global sumTo
-.global halfOf
-.global thirdOf
-.global addArray
-#code section of asm
-.text
+; this assembly file is using NASM instead of GNU assembly (GAS)
+; differences: 
+; comment: ; instead of #
+; global instead of .global
+; we don't need intel_syntax noprefix as NASM uses per default intel syntax
+; variable initialization with RESB instead of .lcomm
+; we need section .data instead of .data
+; for more differences view https://developer.ibm.com/articles/l-gas-nasm/ 
 
+
+; make function globally accessible
+global addVariables
+global countTo
+global sumTo
+global halfOf
+global thirdOf
+global addArray
+
+; unitialized data
+section .bss
+    buffer RESB 1024
+
+;intialized data
+section .data
+    table DB 1,2,3,4
+
+; code section of asm
+section .text
 addVariables:
     ADD RDI, RSI
     MOV RAX, RDI 
@@ -44,12 +60,12 @@ sumTo:
     l_end:
     RET
 
-#SIMD Calling Convention
-#XMM0 - XMM7: Parameters
-#XMM0 return value
-#all registers are caller saved
+; SIMD Calling Convention
+; XMM0 - XMM7: Parameters
+; XMM0 return value
+; all registers are caller saved
 
-#convert doubleword integer to scalar single precision floating point value
+; convert doubleword integer to scalar single precision floating point value
 halfOf:
     CVTSI2SS XMM1, RDI
     MOV RDI, 2
@@ -58,7 +74,7 @@ halfOf:
     MOVSS XMM0, XMM1
     RET
 
-# use SD for double precision
+; use SD for double precision
 thirdOf:
     CVTSI2SD XMM0, RDI
     MOV RDI, 3
@@ -66,6 +82,7 @@ thirdOf:
     DIVSD XMM0, XMM1
     RET 
 
+; adds two arrays with one command (SIMD)
 addArray:
     MOVDQU XMM0, [RDI]
     MOVDQU XMM1, [RSI]

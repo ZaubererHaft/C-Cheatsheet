@@ -6,13 +6,16 @@
 # -g					Generates debug information to be used by GDB debugger
 # -03					Maximum optimization level
 CC      := gcc
-INPUT	:= main.c addparams.S
+SINPUT  := addparams.S
+OINPUT  := bin/assembly.o
+CINPUT	:= main.c
 CFLAGS  := -g -O3
 WFLAGS	:= -Wall -Wextra -Wpedantic -g
 
 all:
 	mkdir -p bin
-	$(CC) $(INPUT) $(CFLAGS) $(WFLAGS) -o bin/program.out
+	nasm -felf64 $(SINPUT) -o bin/assembly.o
+	$(CC) $(OINPUT) $(CINPUT) $(CFLAGS) $(WFLAGS)  -o bin/program.out
 
 clean:
 	rm -rf bin

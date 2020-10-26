@@ -280,12 +280,11 @@ void assembly()
 
     int arr1[] = {1,2,3};
     int arr2[] = {4,5,6};
+    //we add these fixed size arrays with a single(!) instruction
     addArray(arr1, arr2);
 
     for (int i = 0; i < 3; i++)
     {
         printf("val is %d\n", arr1[i]);
-    }
-    
+    }   
 }
-
