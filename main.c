@@ -263,7 +263,7 @@ int countTo(int times);
 int sumTo(int times);
 float halfOf(int number);
 double thirdOf(int number);
-void addArray(int *arr1, int *arr2);
+int addArray(int *arr1, int *arr2, int size);
 
 void assembly()
 {
@@ -278,12 +278,12 @@ void assembly()
     printf("half of 5 is %f\n", halfOf(5));
     printf("third of 1 is %f\n", thirdOf(1));
 
-    int arr1[] = {1,2,3};
-    int arr2[] = {4,5,6};
+    int arr1[] = {1,2,3,4,5,6};
+    int arr2[] = {4,5,6,7,8,9};
     //we add these fixed size arrays with a single(!) instruction
-    addArray(arr1, arr2);
+    addArray(arr1, arr2, 0);
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 6; i++)
     {
         printf("val is %d\n", arr1[i]);
     }   

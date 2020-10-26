@@ -84,10 +84,20 @@ thirdOf:
 
 ; adds two arrays with one command (SIMD)
 addArray:
-    MOVDQU XMM0, [RDI]
-    MOVDQU XMM1, [RSI]
+    XOR RAX, RAX
 
-    ADDPS XMM0, XMM1
-    MOVDQU [RDI], XMM0
-    
+    JMP l2_cmp
+    l2_start:
+        MOVDQU XMM0, [RDI + RAX]
+        MOVDQU XMM1, [RSI + RAX]
+        ADDPS XMM0, XMM1
+        MOVDQU [RDI + RAX], XMM0
+
+        ADD RAX, 16
+        SUB RDX, 4
+    l2_cmp:
+        CMP RDX, 0
+        JG l2_start
+
+    XOR RAX, RAX
     RET
