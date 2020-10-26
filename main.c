@@ -281,7 +281,7 @@ void assembly()
     int arr1[] = {1,2,3,4,5,6};
     int arr2[] = {4,5,6,7,8,9};
     //we add these fixed size arrays with a single(!) instruction
-    addArray(arr1, arr2, 0);
+    addArray(arr1, arr2, 6);
 
     for (int i = 0; i < 6; i++)
     {
