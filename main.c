@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 //prototype functions, normally always needed
 void specialLocalStuff();
@@ -264,6 +265,7 @@ int sumTo(int times);
 float halfOf(int number);
 double thirdOf(int number);
 int addArray(int *arr1, int *arr2, int size);
+int toUpper(char *text);
 
 void assembly()
 {
@@ -287,4 +289,10 @@ void assembly()
     {
         printf("val is %d\n", arr1[i]);
     }   
+
+    char text[] = "hi World!";
+    if(toUpper(text) == EXIT_SUCCESS)
+    {
+        printf("%s\n", text);
+    }
 }

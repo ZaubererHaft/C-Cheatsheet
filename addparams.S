@@ -25,6 +25,7 @@ global sumTo
 global halfOf
 global thirdOf
 global addArray
+global toUpper
 
 ; unitialized data
 section .bss
@@ -33,6 +34,10 @@ section .bss
 ;intialized data
 section .data
     table DB 1,2,3,4
+    ascii_first_lower_case_letter EQU 97
+    ascii_last_lower_case_letter EQU 122
+    ascii_diff_lower_upper_case EQU 32
+    ascii_nil_character EQU 0
 
 ; code section of asm
 section .text
@@ -101,3 +106,26 @@ addArray:
 
     XOR RAX, RAX
     RET
+
+toUpper:
+    XOR RCX, RCX
+    XOR RAX, RAX
+
+    l3_cmp:
+        MOV AL, BYTE [RDI+RCX]
+        CMP AL, ascii_nil_character
+        JLE l3_end 
+        
+        CMP AL, ascii_first_lower_case_letter
+        JL l3_continue
+        CMP AL, ascii_last_lower_case_letter
+        JG l3_continue
+
+        SUB AL, ascii_diff_lower_upper_case
+        MOV BYTE [RDI+RCX], AL
+    l3_continue:
+        INC RCX
+        JMP l3_cmp
+    l3_end:
+        XOR RAX, RAX
+        RET
