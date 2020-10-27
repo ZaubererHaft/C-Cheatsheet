@@ -26,6 +26,7 @@ global halfOf
 global thirdOf
 global addArray
 global toUpper
+global pushPopTest
 
 ; unitialized data
 section .bss
@@ -129,3 +130,14 @@ toUpper:
     l3_end:
         XOR RAX, RAX
         RET
+
+pushPopTest:
+    SUB RSP, 16
+    MOVDQU OWORD [RSP], XMM0
+
+    XORPD XMM0, XMM0
+
+    MOVDQU XMM0, OWORD [RSP]
+    ADD RSP, 16
+
+    RET

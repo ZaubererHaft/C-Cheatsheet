@@ -266,6 +266,7 @@ float halfOf(int number);
 double thirdOf(int number);
 int addArray(int *arr1, int *arr2, int size);
 int toUpper(char *text);
+double pushPopTest(double val);
 
 void assembly()
 {
@@ -295,4 +296,6 @@ void assembly()
     {
         printf("%s\n", text);
     }
+
+    printf("%f\n", pushPopTest(3.141));
 }
