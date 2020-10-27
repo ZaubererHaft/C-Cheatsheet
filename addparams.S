@@ -110,7 +110,6 @@ addArray:
 
 toUpper:
     XOR RCX, RCX
-    XOR RAX, RAX
 
     l3_cmp:
         MOV AL, BYTE [RDI+RCX]
